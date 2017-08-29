@@ -1,0 +1,3 @@
+lane :test do
+  ipa_scale
+end
