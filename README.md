@@ -12,15 +12,35 @@ fastlane add_plugin ipa_scale
 
 ## About ipa_scale
 
-"Checks the size of your built .ipa and warns you if you you are near the given threshold."
+Checks the size of your built .ipa and warns you if you you are near the given threshold.
 
-**Note to author:** Add a more detailed description about this plugin here. If your plugin contains multiple actions, make sure to mention them here.
+This is meant to be called after `gym` has finished building and signing your application to let you know if your latest changes have made your .ipa larger than your desired limit. This was made with the idea of keeping your application from getting above the 100.0 MB cellular network download limit!
+
+🚦 If you exceed your limit, the build will fail. If you are within 5MB of your limit, we will simply warn you but not force fail the build. Otherwise, we will tell you the .ipa size and nothing else!
+
 
 ## Example
 
 Check out the [example `Fastfile`](fastlane/Fastfile) to see how to use this plugin. Try it by cloning the repo, running `fastlane install_plugins` and `bundle exec fastlane test`.
 
-**Note to author:** Please set up a sample project to make it easy for users to explore what your plugin does. Provide everything that is necessary to try out the plugin in this project (including a sample Xcode/Android project if necessary)
+Simply include this within your desired lane, like so
+```
+desc "Builds your .ipa!"
+lane :custom_build do
+  clean_build_artifacts
+  clear_derived_data
+  gym(
+    output_directory: "./build/",
+    export_method: "app-store",
+    output_name: "my-ios-app",
+    scheme: "MyApp",
+  )
+  ipa_size_check(
+    path_to_ipa: "./build/my-ios-app.ipa"
+    ipa_limit: "100.0"
+  )
+end
+```
 
 ## Run tests for this plugin
 
