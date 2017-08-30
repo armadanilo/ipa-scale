@@ -8,10 +8,10 @@ Gem::Specification.new do |spec|
   spec.name          = 'fastlane-plugin-ipa_scale'
   spec.version       = Fastlane::IpaScale::VERSION
   spec.author        = 'Danilo Caetano'
-  spec.email         = 'dcaetano@truecar.com'
+  spec.email         = 'uiguigo@gmail.com'
 
   spec.summary       = '"Checks the size of your built .ipa and warns you if you you are near the given threshold."'
-  # spec.homepage      = "https://github.com/<GITHUB_USERNAME>/fastlane-plugin-ipa_scale"
+  spec.homepage      = "https://github.com/UIGuigo/ipa_scale"
   spec.license       = "MIT"
 
   spec.files         = Dir["lib/**/*"] + %w(README.md LICENSE)
